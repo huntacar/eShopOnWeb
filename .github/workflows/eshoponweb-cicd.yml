@@ -19,18 +19,18 @@ jobs:
     steps:
     #checkout the repository
     - uses: actions/checkout@v2
-    #jetbrains resharper code inspection
-    - name: Annotate
-        # You may pin to the exact commit or the version.
-      uses: JetBrains/ReSharper-InspectCode@v0.3
-      with:
-        solution: ./eShopOnWeb.sln
     #prepare runner for desired .net version SDK
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0.x'
         include-prerelease: true
+    #jetbrains resharper code inspection
+    - name: Annotate
+        # You may pin to the exact commit or the version.
+      uses: JetBrains/ReSharper-InspectCode@v0.5
+      with:
+        solution: ./eShopOnWeb.sln
     #Build/Test/Publish the .net project
     - name: Build with dotnet
       run: dotnet build ./eShopOnWeb.sln --configuration Release
